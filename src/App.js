@@ -25,6 +25,15 @@ class App extends Component {
     };
   }
 
+  loadSampleGame = event => {
+    axios
+      .get("https://minesweeper-api.herokuapp.com/games/100")
+      .then(response => {
+        let json = response.data;
+        // Do something with the json
+        this.setState(json);
+      });
+  };
   render() {
     return (
       <main>
@@ -33,15 +42,15 @@ class App extends Component {
 
         <select id="pet-select">
           <option value="">--Please choose an option--</option>
-          <option value="dog">Easy</option>
-          <option value="cat">Not As Easy</option>
-          <option value="cat">Good Luck!</option>
+          <option value="0">Easy</option>
+          <option value="1">Not As Easy</option>
+          <option value="2">Good Luck!</option>
         </select>
         <table className="mineSweeperTable">
           <tbody>
             <tr>
               <td colSpan={this.state.board[0].length}>
-                <button onClick={this.loadSampleGame}>Load Sample Game</button>
+                <button onClick={this.loadSampleGame}>Load New Game</button>
                 <p>You are playing # {this.state.id}</p>
               </td>
             </tr>

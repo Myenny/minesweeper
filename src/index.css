@@ -16,3 +16,16 @@ td {
   border: 1px solid black;
   background: grey;
 }
+
+td p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button .newGame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+}
