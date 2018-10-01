@@ -23,9 +23,17 @@ td p {
   justify-content: center;
 }
 
-button .newGame {
+table {
+  border-collapse: collapse;
+}
+
+label {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid black;
+}
+
+button {
+  border: 1px solid black;
+  margin: 0;
 }
