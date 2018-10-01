@@ -11,9 +11,36 @@ class Cell extends Component {
   };
 
   render() {
+    let outPut = this.props.value;
+    if (this.props.value === "*") {
+      outPut = "💣";
+    }
+    if (this.props.value === "@") {
+      outPut = "💣";
+    }
+    if (this.props.value === "F") {
+      outPut = "⛳️";
+    }
+    if (this.props.value === "_") {
+      outPut = " ";
+    }
+
+    let clickedBox = "not-clicked";
+    if (
+      this.props.value === "*" ||
+      this.props.value === "@" ||
+      this.props.value === "F" ||
+      this.props.value === "1" ||
+      this.props.value === "2" ||
+      this.props.value === "3" ||
+      this.props.value === "4"
+    ) {
+      clickedBox = "clicked";
+    }
+
     return (
-      <td onContextMenu={this.flag} onClick={this.check}>
-        {this.props.value}
+      <td className={clickedBox} onContextMenu={this.flag} onClick={this.check}>
+        {outPut}
       </td>
     );
   }

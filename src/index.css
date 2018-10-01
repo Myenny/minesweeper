@@ -37,3 +37,11 @@ button {
   border: 1px solid black;
   margin: 0;
 }
+
+.not-clicked:active {
+  background: rgb(90, 177, 64);
+}
+
+.clicked {
+  background: blue;
+}
