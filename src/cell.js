@@ -30,6 +30,7 @@ class Cell extends Component {
       this.props.value === "*" ||
       this.props.value === "@" ||
       this.props.value === "F" ||
+      this.props.value === "_" ||
       this.props.value === "1" ||
       this.props.value === "2" ||
       this.props.value === "3" ||
