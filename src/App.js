@@ -88,7 +88,7 @@ class App extends Component {
         <h1>Mine Sweeper</h1>
         <table>
           <tbody>
-            <tr>
+            <tr class="header">
               <td colSpan={this.state.board[0].length}>
                 <label for="Diff">Difficulty:</label>
                 <select
