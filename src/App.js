@@ -1,44 +1,44 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import axios from "axios";
-import Cell from "./Cell.js";
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import axios from 'axios'
+import Cell from './Cell.js'
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       id: 8301,
       board: [
-        [" ", " ", "1️⃣", " ", " ", " ", " ", " "],
-        [" ", " ", "1️⃣", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " "],
-        [" ", " ", " ", " ", " ", " ", " ", " "]
+        [' ', ' ', '1️⃣', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
       ],
-      state: "new",
+      state: 'new',
       mines: 10,
       difficulty: 0
-    };
+    }
   }
 
   loadGameDiff = event => {
     axios
-      .post("https://minesweeper-api.herokuapp.com/games/")
+      .post('https://minesweeper-api.herokuapp.com/games/', { difficulty: 2 })
       .then(response => {
-        let json = response.data;
+        let json = response.data
         // Do something with the json
-        this.setState(json);
-      });
-  };
+        this.setState(json)
+      })
+  }
   check = (row, column) => {
-    console.log(row);
-    console.log(column);
-    console.log("clicked from app");
+    console.log(row)
+    console.log(column)
+    console.log('clicked from app')
 
     axios
       .post(
@@ -46,16 +46,16 @@ class App extends Component {
         { row: row, col: column }
       )
       .then(response => {
-        let json = response.data;
+        let json = response.data
         // Do something with the json
-        this.setState(json);
-      });
-  };
+        this.setState(json)
+      })
+  }
 
   flag = (row, column) => {
-    console.log(row);
-    console.log(column);
-    console.log("clicked from app");
+    console.log(row)
+    console.log(column)
+    console.log('clicked from app')
 
     axios
       .post(
@@ -63,11 +63,11 @@ class App extends Component {
         { row: row, col: column }
       )
       .then(response => {
-        let json = response.data;
+        let json = response.data
         // Do something with the json
-        this.setState(json);
-      });
-  };
+        this.setState(json)
+      })
+  }
   render() {
     return (
       <main>
@@ -90,115 +90,28 @@ class App extends Component {
                 <p>There are {this.state.mines} mines</p>
               </td>
             </tr>
-            <tr>
-              {this.state.board[0].map((value, index) => {
-                return (
-                  <Cell
-                    value={value}
-                    row={0}
-                    column={index}
-                    check={this.check}
-                    flag={this.flag}
-                  />
-                );
-              })}
-            </tr>
-            <tr>
-              {this.state.board[1].map((value, index) => {
-                return (
-                  <Cell
-                    value={value}
-                    row={1}
-                    column={index}
-                    check={this.check}
-                    flag={this.flag}
-                  />
-                );
-              })}
-            </tr>
-            <tr>
-              {this.state.board[2].map((value, index) => {
-                return (
-                  <Cell
-                    value={value}
-                    row={2}
-                    column={index}
-                    check={this.check}
-                    flag={this.flag}
-                  />
-                );
-              })}
-            </tr>
-            <tr>
-              {this.state.board[3].map((value, index) => {
-                return (
-                  <Cell
-                    value={value}
-                    row={3}
-                    column={index}
-                    check={this.check}
-                    flag={this.flag}
-                  />
-                );
-              })}
-            </tr>
-            <tr>
-              {this.state.board[4].map((value, index) => {
-                return (
-                  <Cell
-                    value={value}
-                    row={4}
-                    column={index}
-                    check={this.check}
-                    flag={this.flag}
-                  />
-                );
-              })}
-            </tr>
-            <tr>
-              {this.state.board[5].map((value, index) => {
-                return (
-                  <Cell
-                    value={value}
-                    row={5}
-                    column={index}
-                    check={this.check}
-                    flag={this.flag}
-                  />
-                );
-              })}
-            </tr>
-            <tr>
-              {this.state.board[6].map((value, index) => {
-                return (
-                  <Cell
-                    value={value}
-                    row={6}
-                    column={index}
-                    check={this.check}
-                    flag={this.flag}
-                  />
-                );
-              })}
-            </tr>
-            <tr>
-              {this.state.board[7].map((value, index) => {
-                return (
-                  <Cell
-                    value={value}
-                    row={7}
-                    column={index}
-                    check={this.check}
-                    flag={this.flag}
-                  />
-                );
-              })}
-            </tr>
+            {this.state.board.map((row, rowIndex) => {
+              return (
+                <tr>
+                  {row.map((value, index) => {
+                    return (
+                      <Cell
+                        value={value}
+                        row={rowIndex}
+                        column={index}
+                        check={this.check}
+                        flag={this.flag}
+                      />
+                    )
+                  })}
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </main>
-    );
+    )
   }
 }
 
-export default App;
+export default App
