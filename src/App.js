@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       id: 8301,
       board: [
-        [' ', ' ', '1️⃣', ' ', ' ', ' ', ' ', ' '],
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -25,10 +25,12 @@ class App extends Component {
       difficulty: 0
     }
   }
-
+  selectGame = event => this.setState({ difficulty: event.target.value })
   loadGameDiff = event => {
     axios
-      .post('https://minesweeper-api.herokuapp.com/games/', { difficulty: 2 })
+      .post('https://minesweeper-api.herokuapp.com/games', {
+        difficulty: this.state.difficulty
+      })
       .then(response => {
         let json = response.data
         // Do something with the json
@@ -36,6 +38,9 @@ class App extends Component {
       })
   }
   check = (row, column) => {
+    if (this.state.id === 0) {
+      return
+    }
     console.log(row)
     console.log(column)
     console.log('clicked from app')
@@ -53,6 +58,9 @@ class App extends Component {
   }
 
   flag = (row, column) => {
+    if (this.state.id === 0) {
+      return
+    }
     console.log(row)
     console.log(column)
     console.log('clicked from app')
@@ -68,6 +76,12 @@ class App extends Component {
         this.setState(json)
       })
   }
+  gameMessage = () => {
+    if (this.state.id === 0) {
+      return <p>Click me for a New game</p>
+    }
+    return <p>You are playing #{this.state.id}</p>
+  }
   render() {
     return (
       <main>
@@ -77,16 +91,19 @@ class App extends Component {
             <tr>
               <td colSpan={this.state.board[0].length}>
                 <label for="Diff">Difficulty:</label>
-                <select id="diff-select">
-                  <option value="">--Please choose a difficulty--</option>
-                  <option value={this.loadGameDiff[0]}>Easy</option>
+                <select
+                  value={this.state.difficulty}
+                  onChange={this.selectGame}
+                >
+                  <option value="0">Easy</option>
                   <option value="1">Not As Easy</option>
                   <option value="2">Good Luck!</option>
                 </select>
                 <button class="newGame" onClick={this.loadGameDiff}>
                   😈
                 </button>
-                <p>You are playing #{this.state.id}</p>
+                {this.gameMessage()}
+
                 <p>There are {this.state.mines} mines</p>
               </td>
             </tr>
